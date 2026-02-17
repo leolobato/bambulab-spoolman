@@ -1,0 +1,13 @@
+.git
+.venv
+.DS_Store
+__pycache__
+*.pyc
+credentials.ini
+credentials.txt
+task.txt
+app.log
+log_errors.txt
+spoolman_filaments.txt
+slicer_filaments.txt
+filament_mapping.json

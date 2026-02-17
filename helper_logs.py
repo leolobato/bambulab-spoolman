@@ -1,10 +1,15 @@
 # logger.py
+import os
 import time
 import threading
 import traceback
 
+from tools import DATA_DIR
+
 class Logger:
-    def __init__(self, log_file_path="app.log", max_lines=1000):
+    def __init__(self, log_file_path=None, max_lines=1000):
+        if log_file_path is None:
+            log_file_path = os.path.join(DATA_DIR, "app.log")
         self.log_file_path = log_file_path
         self.max_lines = max_lines
         self.lock = threading.Lock()

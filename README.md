@@ -37,32 +37,49 @@ It monitors 3D printing tasks, retrieves filament usage data, and generates deta
 
 # Installation & Usage
 
-## Requirements
+## Docker (Recommended)
+
+The easiest way to run the application is with Docker:
+
+```bash
+docker compose up -d
+```
+
+This will build the image and start the container. The web interface will be available at: http://localhost:2323
+
+All persistent data (credentials, logs, filament mappings, task history) is stored in a `data/` directory mounted as a volume, so it survives container rebuilds.
+
+To stop:
+
+```bash
+docker compose down
+```
+
+To view logs:
+
+```bash
+docker compose logs -f
+```
+
+## Running Without Docker
+
+### Requirements
 
 - Python 3.x
-- Required Python libraries:
+- Required Python libraries (install via `pip install -r requirements.txt`):
   - paho-mqtt
   - requests
-  - json
-  - difflib
-  - re
-  - configparser
-## Running the Application
+  - websockets
 
-The setup process has been simplified.
+### Running the Application
 
 Simply run:
 
 ```bash
 python main.py
 ```
-The application will:
 
-Start the backend
-
-Launch the GUI
-
-Open the web interface at: http://{ip}:2323
+The application will start the backend, launch the GUI, and serve the web interface at: http://localhost:2323
 
 ## First-Time Setup
 
@@ -120,7 +137,9 @@ The web interface created with Flutter (Port 2323) provides:
 
 main.py must remain running continuously.
 
-For Linux or Raspberry Pi setups, it is recommended to configure it as a system service for automatic startup.
+When using Docker, the container is configured with `restart: unless-stopped`, so it will automatically restart after reboots.
+
+For non-Docker Linux or Raspberry Pi setups, it is recommended to configure it as a system service for automatic startup.
 
 # Future Work
 

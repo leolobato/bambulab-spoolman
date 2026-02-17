@@ -1,5 +1,5 @@
-import requests
 import os
+import requests
 from tools import *
 import json
 from helper_logs import logger
@@ -77,7 +77,7 @@ def ProcessSpoolmanFilament(filaments):
     return filaments_list
 
 def SaveFilamentsToFile(filaments):
-    filename = "spoolman_filaments.txt"
+    filename = os.path.join(DATA_DIR, "spoolman_filaments.txt")
     try:
         with open(filename, "w", encoding="utf-8") as file:
             for filament in filaments:
@@ -87,7 +87,7 @@ def SaveFilamentsToFile(filaments):
         logger.log_exception(e)
         
 def LoadFilamentMapping():
-    with open("filament_mapping.json", "r") as file:
+    with open(os.path.join(DATA_DIR, "filament_mapping.json"), "r") as file:
         return json.load(file)    
       
 def GetSpoolmanID(filament_mapping, slicer_filamentID):

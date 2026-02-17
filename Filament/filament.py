@@ -1,12 +1,14 @@
 import json
 import difflib
+import os
 import re
 from helper_logs import logger
+from tools import DATA_DIR
 
 # File paths
-BAMBU_FILE = "slicer_filaments.txt"
-SPOOLMAN_FILE = "spoolman_filaments.txt"
-MAPPING_FILE = "filament_mapping.json"
+BAMBU_FILE = os.path.join(DATA_DIR, "slicer_filaments.txt")
+SPOOLMAN_FILE = os.path.join(DATA_DIR, "spoolman_filaments.txt")
+MAPPING_FILE = os.path.join(DATA_DIR, "filament_mapping.json")
 
 def parse_filaments(filename):
     """Parses filament data from a text file."""

@@ -2,7 +2,10 @@ import configparser
 import os
 import socket
 
-CONFIG_FILE = "credentials.ini"
+DATA_DIR = os.environ.get("BAMBU_DATA_DIR", "data")
+os.makedirs(DATA_DIR, exist_ok=True)
+
+CONFIG_FILE = os.path.join(DATA_DIR, "credentials.ini")
 SECTION = "DEFAULT"
 def ReadCredentials():
     config = configparser.ConfigParser()

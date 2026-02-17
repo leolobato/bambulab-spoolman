@@ -2,6 +2,7 @@ import json
 import os
 import Spoolman.spoolman_filament as spoolman_filament
 from helper_logs import logger
+from tools import DATA_DIR
 
 class PrintTask:
   def __init__(self):
@@ -53,7 +54,7 @@ class PrintTask:
       
   def ReportAndSaveTask(self):
       """Save the task to a task.txt file as a JSON object."""
-      file_name = "task.txt"
+      file_name = os.path.join(DATA_DIR, "task.txt")
       if self.percent_complete != 0:
         if self.teoric_filaments:
             self.reported_filament = []  # Inicializar si es None

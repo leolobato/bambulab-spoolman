@@ -1,0 +1,10 @@
+services:
+  bambulab-spoolman:
+    build: .
+    container_name: bambulab-spoolman
+    restart: unless-stopped
+    ports:
+      - "2323:2323"
+      - "12346:12346"
+    volumes:
+      - ./data:/app/data

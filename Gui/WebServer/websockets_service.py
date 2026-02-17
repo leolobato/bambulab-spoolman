@@ -1,4 +1,5 @@
 import asyncio
+import os
 import websockets
 import threading
 import json
@@ -55,7 +56,9 @@ class WebSocketService:
         self.port = port
         self.connected_clients = set()
 
-    def load_tasks_from_file(self, path="task.txt"):
+    def load_tasks_from_file(self, path=None):
+        if path is None:
+            path = os.path.join(DATA_DIR, "task.txt")
         """Parses the task.txt JSON file."""
         try:
             with open(path, "r", encoding="utf-8") as f:
@@ -64,7 +67,9 @@ class WebSocketService:
             print(f"Error reading tasks file: {e}")
             return []
         
-    def load_logs_from_file(self, path="app.log"):
+    def load_logs_from_file(self, path=None):
+        if path is None:
+            path = os.path.join(DATA_DIR, "app.log")
         """Parses the app.log JSON file."""
         try:
             with open(path, "r", encoding="utf-8") as f:
@@ -87,7 +92,7 @@ class WebSocketService:
                     continue
 
                 if message == "get_logs":
-                    with open("app.log", "r") as f:
+                    with open(os.path.join(DATA_DIR, "app.log"), "r") as f:
                         log_content = f.read()
                     response = {"type": "logs", "payload": [log_content]}
                     await websocket.send(json.dumps(response))
